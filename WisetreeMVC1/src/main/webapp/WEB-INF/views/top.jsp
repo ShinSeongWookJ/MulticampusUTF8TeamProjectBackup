@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	
   <title>Goods Store Webpage</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +36,7 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item">
+       <li class="nav-item">
         <a class="nav-link" href="${myctx}/join">Join</a>
       </li>
       <li class="nav-item">
@@ -68,19 +69,19 @@
       </li>    
       <li class="nav-item">
         <a class="nav-link" href="${myctx}/notice_board/write">Notice Write</a>
-      </li>    
-<%--       <li class="nav-item">
-        <a class="nav-link" href="${myctx}/board/list">Review List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${myctx}/review/list">Review List</a>
       </li>    
       <li class="nav-item">
-        <a class="nav-link" href="${myctx}/board/write">Review Write</a>
-      </li>    
+        <a class="nav-link" href="${myctx}/review/write">Review Write</a>
+      </li>  
       <li class="nav-item">
         <a class="nav-link" href="${myctx}/board/list">Board List</a>
       </li>    
       <li class="nav-item">
         <a class="nav-link" href="${myctx}/board/write">Board Write</a>
-      </li>     --%>
+      </li>
     </ul>
   </div>  
 </nav>
