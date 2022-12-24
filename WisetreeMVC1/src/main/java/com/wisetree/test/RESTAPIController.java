@@ -1,6 +1,15 @@
 package com.wisetree.test;
 
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.review.model.ReviewVO;
+import com.review.service.ReviewService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -22,8 +31,31 @@ import lombok.extern.log4j.Log4j;
  * 	DELETE	DELETE를 통해 리소스를 삭제합니다.
  *  ----------------------------------------------------*/
 
+/*  HTTP메서드          URI                설명
+ *  GET                /prdreviews           모든 리뷰를 조회한다
+ *  GET                /prdreviews/create    리뷰를 생성하기 위한 Form
+ *  POST               /prdreviews           리뷰를 생성한다
+ *  GET                /prdreviews/:id       id에 해당하는 리뷰를 조회한다
+ *  GET                /prdreviews/:id/edit  id에 해당하는 리뷰를 수정하기 위한 Form
+ *  PUT                /prdreviews/:id       id에 해당하는 리뷰를 수정한다
+ *  DELETE             /prdreviews/:id       id에 해당하는 리뷰를 삭제한다
+ * */
+
 @RestController
 @Log4j
 public class RESTAPIController {
-
+	
+	@Inject
+	private ReviewService reviewService;
+	
+	@GetMapping(value = "/prdreviews")
+	public List<ReviewVO> revList(HttpSession ses){
+		Integer pnum=(Integer)ses.getAttribute("pnum");
+		log.info("pnum =>"+pnum);
+		List<ReviewVO> rearr=this.reviewService.listReview(pnum);
+		return rearr;
+	}
+	
+	/* @GetMapping(value = "/prdreviewCnt") */
+	
 }
