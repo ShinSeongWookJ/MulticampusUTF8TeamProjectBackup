@@ -1,5 +1,7 @@
 package com.wisetree.test;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,9 +53,27 @@ public class BoardController_notice {
 	
 	
 	@GetMapping("/list")
-	public String boardListPaging() {
-			
+	public String boardList(Model m) {
+		
+		
+	
+		
+		 
+		//"boardArr"
+		List<BoardVO> boardArr=this.boardService.selectBoardAll();
+		m.addAttribute("boardArr",boardArr);
 		return "notice_board/boardList";
 	}//----------------------------------------
+	
+	@GetMapping("view/{num}")
+	public String boardView(Model m,@PathVariable("num") int num) {
+		log.info("num=="+num);
+		
+		BoardVO board=this.boardService.selectBoardByIdx(num);
+		m.addAttribute("board",board);
+		
+		return "notice_board/boardView";
+		
+	}
 
 }
