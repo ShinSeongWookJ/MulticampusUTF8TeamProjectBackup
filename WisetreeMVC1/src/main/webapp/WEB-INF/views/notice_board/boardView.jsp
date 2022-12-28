@@ -53,7 +53,8 @@
 			<td colspan="4" align=center>
 				<a href="../write">글쓰기</a> | 
 				<a href="../list">목록</a> |  
-				<a href="#" onclick="go(1)">삭제</a>
+				<a href="#" onclick="go(1)">삭제</a> |  
+				<a href="#" onclick="go(2)">편집</a>
 			</td>
 		</tr>
 	
@@ -61,9 +62,24 @@
 	
 	</table>
 	
-	<!-- 편집 또는 삭제를 위한 form----------------------------- -->
-
-	<!--  -->
+<!-- 편집 또는 삭제를 위한 form----------------------------- -->
+<form name="frm" id="frm">
+	<input type="text" name="num" value="<c:out value="${board.num }"/>">
+	<input type="text" name="mode">
+	<div class="row mt-4" id="divPasswd" style="display:none">
+		<div class="col-md-3 offset-md-1 text-right mr-2">
+			<label for="passwd">글 비밀번호</label>
+		</div>
+		<div class="col-md-4">
+			<input type="password" name="passwd" id="passwd"
+			class="form-control" placeholder="Password" required>
+		</div>
+		<div class="col-md-3">
+			<button id="btn" class="btn btn-outline-primary"></button>
+		</div>	
+	</div>
+</form>
+	<!-- ------------------------------------------- -->
 </div>
 
 <script type="text/javascript">
@@ -74,10 +90,14 @@ function go(flag){
 		$('#passwd').focus();
 		frm.action='../delete';
 		frm.method='post';
+	}else if(flag==2){
+		frm.mode.value='edit';
+		$('#btn').text('글수정');
+		$('#passwd').focus();
+		frm.action='../edit';
+		frm.method='post';
 	}
 	$('#divPasswd').show(1000);
 }
 </script>
-
-
 <c:import url="/foot"/>
