@@ -35,7 +35,7 @@ public class BoardController_notice {
 	public String boardWrite() {
 		return "notice_board/boardWrite";
 	}
-	@PostMapping("write")
+	@PostMapping("/write")
 	public String boardInsert(Model m,
 			@ModelAttribute BoardVO board) {
 		
@@ -91,7 +91,7 @@ public class BoardController_notice {
 		return util.addMsgLoc(m, str, loc);
 	}
 	
-	@PostMapping("edit")
+	@PostMapping("/edit")
 	public String boardEditform(Model m,
 			@RequestParam(defaultValue = "0") int num
 			) {
@@ -103,6 +103,19 @@ public class BoardController_notice {
 		m.addAttribute("board",vo);
 		
 		return "notice_board/boardEdit";
+	}
+	
+	@PostMapping("/update")
+	public String boardEditform(Model m,@ModelAttribute BoardVO board
+			) {
+		
+		//글번호로 해당 글 가져오기
+		int vo=this.boardService.updateBoard(board);
+		
+		//Model에 해당 글 저장 "board"
+		m.addAttribute("board",vo);
+		
+		return "redirect:/notice_board/list";
 	}
 
 }
