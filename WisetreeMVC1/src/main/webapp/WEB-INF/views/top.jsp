@@ -17,12 +17,15 @@
 
 <!-- [로그인 상태 탭 1,2] <- 어떠한 로그인도 안된 상태에서는 로그인상태가 둘다 안보이게 -->
 <script>
+
+$('.dropdown-toggle').dropdown()
 $(function(){
 	if(${loginUser eq null and k_loginUser eq null}){
 		document.getElementById("normalUserLogined").style.display = "none";
 		document.getElementById("kakaoUserLogined").style.display = "none";
 	}
 })
+
 </script>
 
 <style>
@@ -48,7 +51,6 @@ $(function(){
 		<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		
 		<!-- 메뉴 네비게이션 -->
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
@@ -99,17 +101,17 @@ $(function(){
 				<!-- [상품 추가 탭] <- 로그인된 유저의 상태가 9(관리자 인경우) 상품추가 가 보이게 -->
 				<%-- <c:if test="${loginUser.status eq 9 or k_loginUser.status eq 9}"> --%>
 					<li class="nav-item">
-						<a class="nav-link" href="${myctx}/admin/register">Add Products</a>
+						<a class="nav-link" href="${myctx}/admin/prodForm">Add Products</a>
 					</li>
 				<!-- [상품 목록 탭] <- 로그인된 유저의 상태가 9(관리자 인경우) 상품추가 가 보이게 -->
 					<li class="nav-item">
-						<a class="nav-link"	href="${myctx}/admin/list">Products List</a>
+						<a class="nav-link"	href="${myctx}/prodList">Products List</a>
 					</li>
 				<%-- </c:if> --%>
 				
 				<!-- 장바구니 목록 탭  -->
 				<li class="nav-item">
-					<a class="nav-link" href="${myctx}/cart">My Cart</a>
+					<a class="nav-link" href="${myctx}/cart/cartList">My Cart</a>
 				</li>
 				
 				<!-- 공지사항 목록 탭  -->
@@ -141,21 +143,23 @@ $(function(){
 				<li class="nav-item">
 					<a class="nav-link" href="${myctx}/free_board/write">Board Write</a>
 				</li>
-				
+
+					
 			</ul>
 		</div>
-		<button class="btn btn-outline-dark" type="button">
+		<button class="btn btn-outline-dark" type="button" onclick="location.href='${myctx}/cart'">
 				<i class="bi-cart-fill me-1"></i>
 				Cart
 				<span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-			</button>
+		</button>
+		
 	</nav>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Shop in style</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                    <p class="lead fw-normal text-white-50 mb-0">With this shop homepage template</p>
                 </div>
             </div>
         </header>
