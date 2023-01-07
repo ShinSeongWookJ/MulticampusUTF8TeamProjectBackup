@@ -72,6 +72,28 @@
 		</div>
 	
 	</div>
+	
+	<form name="editform">
+		<input type="hidden" name="itemNo" id="itemNo">
+	</form>
+	<form name="removeform">
+		<input type="hidden" name="itemNo" id="itemNo">
+	</form>
 
+<script>
+function edit(itemNo){
+	//alert(itemNo);
+	editform.itemNo.value=itemNo;
+	editform.action="adminpage/edit";
+	editform.submit();
+}
 
+function remove(itemNo){
+	//alert(itemNo);
+	removeform.itemNo.value=itemNo;
+	removeform.action="adminpage/remove";
+	removeform.submit();
+}
+
+</script>
 <c:import url="/foot" />

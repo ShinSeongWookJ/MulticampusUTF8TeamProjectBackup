@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shop.model.ItemVO;
@@ -31,13 +32,16 @@ public class ProductController {
 		return "prodList";
 	}
 	
+	
 	@GetMapping("/prodDetail2")
-	public String prodDetail(Model m, @RequestParam(defaultValue="0") int itemNo, HttpSession ses) {
+	public String prodDetail(Model m, @RequestParam(value="itemNo",defaultValue="0") int itemNo, HttpSession ses) {
 		if(itemNo==0) {
 			return "redirect:index";
 		}
 		
 		ses.setAttribute("itemNo", itemNo);
+		log.info(itemNo);
+		
 		ItemVO Item=this.shopService.selectByitemNum(itemNo);
 		m.addAttribute("prod",Item);
 		return "prodDetail2";
