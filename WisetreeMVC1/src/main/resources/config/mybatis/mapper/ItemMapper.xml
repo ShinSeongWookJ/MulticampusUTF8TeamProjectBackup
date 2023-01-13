@@ -9,6 +9,12 @@
 		from item2 i where itemNo=#{value}
 	</select>
 	
+	
+	<select id="selectByQty" resultType="Item" parameterType="string">
+		select * from item2 where quality=#{value}
+	</select>
+	
+	
 	<select id="itemList" resultType="Item">
 		select i.*,
 		(select up_Name from upOption where up_Code=i.up_Code) up_Name,
@@ -21,6 +27,6 @@
 	</delete>
 	
 	<update id="modifyItem" parameterType="Item">
-		update item2 set itemName=#{itemName},itemBrand=#{itemBrand},price=#{price},saleprice=#{saleprice},point=#{point} where itemNo=${itemNo}
+		update item2 set itemName=#{itemName},itemBrand=#{itemBrand},price=#{price},saleprice=#{saleprice},point=#{point} where itemNo=#{itemNo}
 	</update>
 </mapper>

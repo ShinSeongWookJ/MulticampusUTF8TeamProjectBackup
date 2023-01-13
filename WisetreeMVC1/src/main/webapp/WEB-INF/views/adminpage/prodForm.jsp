@@ -101,7 +101,7 @@
                      <td width="80%">
                      <select name="up_Code" id="up_Code"
                         onchange="selectDownCategory(this.value)">
-                           <option value="">::상위 카테고리::</option> -->
+                           <option value="">::상위 카테고리::</option>
                            <c:forEach var="up" items="${upoption}">
                            	<option value="${up.up_Code}">${up.up_Name}</option>
                            </c:forEach>
@@ -136,9 +136,9 @@
                   <tr>
                      <td>상품이미지</td>
                      <td>
-                     <input type="file" name="itemImage1"><br> 
-                     <input type="file" name="itemImage1"><br> 
-                     <input type="file" name="itemImage1"><br>
+                     <input type="file" name="mitemImage1"><br> 
+                     <input type="file" name="mitemImage1"><br> 
+                     <input type="file" name="mitemImage1"><br>
                   </td>
                   </tr>
 
