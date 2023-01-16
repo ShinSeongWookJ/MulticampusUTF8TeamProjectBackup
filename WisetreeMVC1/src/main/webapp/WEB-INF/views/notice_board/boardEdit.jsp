@@ -53,7 +53,7 @@ $(function(){
    </p>
    
    <form name="bf" id="bf" role="form" action="update" method="POST" enctype="multipart/form-data">
-	   <input type="text" name="num" value="<c:out value="${board.num }"/>">
+	   <input type="hidden" name="num" value="<c:out value="${board.num }"/>">
 	   <!-- <input> --><!-- 원본글쓰기mode는 write, 답변글쓰기 mode는 rewrite로 감 - 활용할때 사용  -->
 	   <table>
 	   		<tr>
@@ -69,8 +69,8 @@ $(function(){
 	   			<td style="width:20%"><b>글쓴이</b></td>
         		<td style="width:80%">
 	   				<input type="text" name="name" id="name" 
-	   				value='<c:out value="${board.name }"/>'
-	   				class="form-control">
+	   				value='<c:out value="${loginUser.userid}"/>'
+	   				class="form-control" readonly>
 	   			</td>
 	   		</tr>
 	   		
@@ -115,8 +115,8 @@ $(function(){
 	   				<input type="file" name="mfilename" id="filename" 
 	   				class="form-control">
 	   				<!-- ---------------------------------- -->
-	   				<!-- ---기존 파일 보내기-------------------- -->
-	   				<input type="text" name="old_filename" value="<c:out value="${board.filename }"/>">
+	   				<!-- ---기존 파일 보내기hidden-------------------- -->
+	   				<input type="hidden" name="old_filename" value="<c:out value="${board.filename }"/>">
 	   				<!-- ----------------------------------- -->
 	   			</td>
 	   		</tr>

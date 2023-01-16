@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:import url="/top"/>
 
@@ -84,8 +85,7 @@
         <div class="col-md-12">
            <h1 class="text-center">상품 수정[Admin Page]</h1>
            
-           <form name="prodF" id="prodF" method="POST" enctype="multipart/form-data" 
-           action onsubmit="return check()">
+           <form name="prodF" id="prodF" action="prodEdit" method="POST" enctype="multipart/form-data">
            
             <!-- 파일업로드시: enctype="multipart/form-data"-->
             <table class="table table-condensed table-bordered mt-4">
@@ -118,7 +118,7 @@
                   
                   <tr>
                      <td width="20%"><b>상품번호</b></td>
-                     <td width="80%"><input type="text" name="itemNo" id="itemNo" value="${itemvo.itemNo }">
+                     <td width="80%"><input type="text" name="itemNo" id="itemNo" value="${itemvo.itemNo } "readonly>
                      <span style="color: red"> 
                      </span>
                		 </td>
@@ -140,13 +140,13 @@
                      <td width="20%"><b>상품스펙</b></td>
                      <td width="80%">
                      <b>${itemvo.quality}</b>
-                     <select name="pspec" id="pspec">
+                     <select name="quality" id="quality">
                            <option value="NEW" selected>NEW</option>
                            <option value="HIT">HIT</option>
                            <option value="BEST">BEST</option>
                      </select></td>
                   </tr>
-                  <tr>
+            <!--       <tr>
                      <td>상품이미지</td>
                      <td>
                      <IMG SRC="" WIDTH="150PX" >
@@ -154,8 +154,32 @@
                      <input type="file" name="itemImage1"><br> 
                      <input type="file" name="itemImage1"><br> 
                      <input type="file" name="itemImage1"><br>
-                  </td>
-                  </tr>
+                     </td>
+                  </tr> -->
+                  
+            <tr>
+	   			<td style="width:20%"><b>상품이미지</b></td>
+        		<td style="width:80%">
+			   		<!-- 파일명의 확장자를 검사하기 위해 모두 소문자로 바꿈 -->
+					<c:set var="fname" value="${fn:toLowerCase(itemvo.itemImage1) }"/>
+					<!-- ------------------------------------- -->
+					<!-- ---이미지 보이도록 수정---------------------------------- -->
+					<c:if test="${fn:endsWith(fname,'.jpg') or fn:endsWith(fname,'.gif') or fn:endsWith(fname,'.png') }">
+						<img width="80px" class="img img-thumbnail"
+						src="${pageContext.request.contextPath }/resources/product_images/${itemvo.itemImage1}">
+					</c:if>
+					<!-- ---------------------------------------------------- -->
+					
+			
+	   				<!-- ---새로 업로드 하는 파일---------------- -->
+	   				<input type="file" name="mfilename" id="filename" 
+	   				class="form-control">
+	   				<!-- ---------------------------------- -->
+	   				<!-- ---기존 파일 보내기hidden-------------------- -->
+	   				<input type="hidden" name="itemImage1" value="<c:out value="${itemvo.itemImage1 }"/>">
+	   				<!-- ----------------------------------- -->
+	   			</td>
+	   		</tr>
 
                   <tr>
                      <td width="20%"><b>상품수량</b></td>
@@ -198,9 +222,7 @@
                   </tr>
                   <tr>
                      <td colspan="2">
-                        <button type="submit" class="btn btn-success">
-                        <a href="javascript:editregister('${itemvo.itemNo}')">상품등록</a>
-                        </button>
+                        <button type="" class="btn btn-success" onclick="check()" >상품정보수정</button>
                      </td>
                   </tr>
                </tbody>
@@ -212,14 +234,10 @@
     </div>
   </div>
     
-<form name="resultform">
-	<input type="hidden" name="itemNo" id="itemNo">
-</form>
+
 <script>
-function editregister(itemNo){
-	//alert(itemNo);
-	resultform.itemNo.value=itemNo;
-	resultform.action="prodEdit";
-	resultform.submit();
+function editregister(){
+	
+	prodF.submit();
 }
 </script>

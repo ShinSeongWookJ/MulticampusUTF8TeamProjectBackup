@@ -39,19 +39,21 @@
 		</tr>
 		
 		<tr>
-			<td>제목</td>
-			<td>
+			<td >제목</td>
+			<td colspan="3">
 				<c:out value="${board.subject }"/>
 			</td>
+		</tr>
+		<tr>
 			<td>글내용</td>
-			<td>
+			<td colspan="3">
 				${board.content }
 			</td>
 		</tr>
 		
 		<tr>
 			<td>첨부파일</td>
-			<td>
+			<td colspan="3">
 			<!-- ---첨부파일이 있다면------------------------ -->
 			<c:if test="${board.filename ne null }">
 			<a href="#" onclick="down()">
@@ -77,10 +79,20 @@
 			<td colspan="4" align=center>
 				<c:if test="${loginUser.status eq 9 or k_loginUser.status eq 9}">
 				<a href="../write">글쓰기</a> |   
-				<a href="#" onclick="go(1)">삭제</a> |  
+				<%-- ${noticeCon } --%>
+					<c:if test="${board.num ne noticeCon}">
+						<a href="#" onclick="go(1)">삭제</a> |  
+					</c:if>
+				
 				<a href="#" onclick="go(2)">편집</a> |
 				</c:if>
 				<a href="../list">목록</a>
+				
+				<c:if test="${board.num eq noticeCon}">
+				<br>
+				<a> * 글 삭제를 원하실 경우 공지글을 해제해주세요</a>
+				</c:if>
+				
 			</td>
 		</tr>
 	
@@ -91,16 +103,16 @@
 	
 <!-- ---파일다운로드를 위한 form text----- -->
 <form name="fileF" id="fileF" method="post" action="../../fileDown_notice">
-	<input type="text" name="fname" value="<c:out value="${board.filename }"/>"/>
-	<input type="text" name="origin_fname" value="<c:out value="${board.originFilename }"/>"/>
+	<input type="hidden" name="fname" value="<c:out value="${board.filename }"/>"/>
+	<input type="hidden" name="origin_fname" value="<c:out value="${board.originFilename }"/>"/>
 </form>
 <!-- -------------------------------- -->
 	
 	
 <!-- 편집 또는 삭제를 위한 form----------------------------- -->
 <form name="frm" id="frm">
-	<input type="text" name="num" value="<c:out value="${board.num }"/>">
-	<input type="text" name="mode">
+	<input type="hidden" name="num" value="<c:out value="${board.num }"/>">
+	<input type="hidden" name="mode">
 	<div class="row mt-4" id="divPasswd" style="display:none">
 		<div class="col-md-3 offset-md-1 text-right mr-2">
 			<label for="passwd">글 비밀번호</label>

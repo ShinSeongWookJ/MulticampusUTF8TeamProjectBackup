@@ -3,6 +3,11 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- The Modal -->
+<style>
+	.modal p{
+		word-wrap:break-word;
+	}
+</style>
 <div class="modal" id="noticePop">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -15,52 +20,36 @@
 
 				<!-- Modal body -->
 				<div class="modal-body">
-				
-				
-	<table class="table mt-4">
-		<tr>
-			<!-- <td>제목</td> -->
-			<td>
-				<c:out value="${notice.subject }"/>
-			</td>
-			<!-- <td>작성일</td> -->
-			<td>
+							
+
+		<div style="text-align: center;">
+			
+			<p style="text-align: center;word-wrap:break-word;">
+			<c:out value="${notice.subject }"/>
+			
+			</p>
+			
+			<div style="float: right;">
 				<c:out value="${notice.wdate }"/>
-			</td>
-		</tr>
-		<!-- <tr>
-		</tr> -->
-		<tr>
-			<!-- <td>글내용</td> -->
-			<td>
-				${notice.content }
-			</td>
-		</tr>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		<hr>
+		<p style="text-align: center;">
+		${notice.content }
+		</p>
 		
-		<tr>
-			<td>첨부파일</td>
-			<td>
-			<!-- ---첨부파일이 있다면------------------------ -->
-			<c:if test="${notice.filename ne null }">
-			<a href="#" onclick="down()">
-				${notice.originFilename }
-			</a>
-				[ <c:out value="${notice.filesize }"/> bytes]
-			</c:if>
-			<!-- --------------------------------------- -->
+		<p style="text-align:center;">
 			<!-- 파일명의 확장자를 검사하기 위해 모두 소문자로 바꿈 -->
 			<c:set var="fname" value="${fn:toLowerCase(notice.filename) }"/>
 			<!-- ------------------------------------- -->
 			<!-- ---이미지 보이도록 수정---------------------------------- -->
 			<c:if test="${fn:endsWith(fname,'.jpg') or fn:endsWith(fname,'.gif') or fn:endsWith(fname,'.png') }">
-				<img width="80px" class="img img-thumbnail"
+				<img width="300px" class="img img-thumbnail"
 				src="${pageContext.request.contextPath }/resources/notice_board_upload/${notice.filename}">
 			</c:if>
-			<!-- ---------------------------------------------------- -->
-			
-			</td>
-		</tr>
-	</table>
+		</p>
+
 	
 	<!-- ---파일다운로드를 위한 form text----- -->
 <form name="fileF" id="fileF" method="post" action="../../fileDown_notice">
@@ -75,7 +64,7 @@ function down(){
 	fileF.submit();
 }
 </script>
-				<label for="undoNotice">
+				<label style="text-align: right;" for="undoNotice">
 					<input type="checkbox" name="saveId" id="undoNotice" > 하루동안 보이지 않기
 				</label>
 				
